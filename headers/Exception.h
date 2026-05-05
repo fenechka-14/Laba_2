@@ -1,4 +1,5 @@
 #pragma once
+
 class Exception {
 public:
     virtual  ~Exception() {} //виртуальный деструктор

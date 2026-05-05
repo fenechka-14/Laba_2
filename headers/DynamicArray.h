@@ -1,9 +1,10 @@
 #pragma once
+
 #include "Exception.h"
 #include "Option.h"
 
 template <typename T>
-class Dynamic_Array {
+class DynamicArray {
     private:
         T* data; //* на дин массив el
         int size; //now size el
@@ -22,7 +23,7 @@ class Dynamic_Array {
         }
     public:
         //создает массив-копию из существующего
-        Dynamic_Array(T* items, int count) : size(count), capacity(count) {
+        DynamicArray(T* items, int count) : size(count), capacity(count) {
             if (count < 0) throw InvalidArgumentException();
             data = new T[capacity];
             for (int i=0; i<size; ++i) {
@@ -30,23 +31,23 @@ class Dynamic_Array {
             }
         }
         //создает массив заданного размера (заполненый значениями по умолчанию)
-        Dynamic_Array(int size = 0) : size(size), capacity(size > 0 ? size : 1) {
+        DynamicArray(int size = 0) : size(size), capacity(size > 0 ? size : 1) {
             if (size < 0) throw InvalidArgumentException();
             data = new T[capacity];
         }
         //копирует
-        Dynamic_Array(const Dynamic_Array<T>& other) : size(other.size), capacity(other.capacity) {
+        DynamicArray(const DynamicArray<T>& other) : size(other.size), capacity(other.capacity) {
             data = new T[capacity];
             for (int i=0; i<size; ++i) {
                 data[i] = other.data[i];
             }
         }
         //деструктор
-        ~Dynamic_Array() {
+        ~DynamicArray() {
             delete[] data;
         }
         //присваивает один массив другому
-        Dynamic_Array<T>& operator=(const Dynamic_Array<T>& other) {
+        DynamicArray<T>& operator=(const DynamicArray<T>& other) {
             if (this != &other) {
                 delete[] data;
                 size = other.size;

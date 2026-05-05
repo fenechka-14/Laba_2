@@ -6,20 +6,30 @@ set(CMAKE_CXX_STANDARD 11)
 # Основная программа
 add_executable(main source/main.cpp
         headers/Exception.h
-        headers/Dynamic_Array.h
-        headers/Linked_List.h
+        headers/DynamicArray.h
+        headers/LinkedList.h
         headers/Option.h
         headers/Sequence.h
-        headers/Array_Sequence.h
+        headers/ArraySequence.h
+        headers/MutableArraySequence.h
+        headers/ImmutableArraySequence.h
+        headers/BitSequence.h
+        headers/ListSequence.h
 )
 
 # Тесты
 add_executable(tests tests/tests.cpp
         headers/Exception.h
-        headers/Dynamic_Array.h
-        tests/tests_Dynamic_Array.cpp
-        headers/Linked_List.h
-        tests/tests_Linked_List.cpp
+        headers/DynamicArray.h
+        tests/testsDynamicArray.cpp
+        headers/LinkedList.h
+        tests/testsLinkedList.cpp
         headers/Option.h
         headers/Sequence.h
-        headers/Array_Sequence.h)
+        headers/ArraySequence.h
+        tests/testsArraySequence.cpp
+        headers/MutableArraySequence.h
+        headers/ImmutableArraySequence.h
+        headers/BitSequence.h
+        tests/testsBitSequence.cpp
+        headers/ListSequence.h)

@@ -1,9 +1,10 @@
 #pragma once
+
 #include "Exception.h"
 #include "Option.h"
 
 template <typename T>
-class Linked_List {
+class LinkedList {
     private:
     //структура узла
         struct Node {
@@ -14,9 +15,11 @@ class Linked_List {
             Node(const T& val, Node* p = nullptr, Node* n = nullptr)
             : value(val), prev(p), next(n) {}
         };
+
         Node* head; //* на первый узел
         Node* tail; //* на последний узел
         int length; //кол-во узлов в списке
+
         //возвращает указателььна узел по индексу
         Node* getNode(int index) const {
             if (index < 0 ||  index >= length) {
@@ -100,16 +103,16 @@ class Linked_List {
         }
     //конструкторы
         //по умолчанию
-        Linked_List() : head(nullptr), tail(nullptr), length(0) {}
+        LinkedList() : head(nullptr), tail(nullptr), length(0) {}
         //из массива в список
-        Linked_List(T* items, int count) : head(nullptr), tail(nullptr), length(0) {
+        LinkedList(T* items, int count) : head(nullptr), tail(nullptr), length(0) {
             if (count <0 ) throw InvalidArgumentException();
             for (int i=0; i < count; ++i) {
                 Append(items[i]);
             }
         }
         //копирующий
-        Linked_List(const Linked_List<T>& other) : head(nullptr), tail(nullptr), length(0) {
+        LinkedList(const LinkedList<T>& other) : head(nullptr), tail(nullptr), length(0) {
             Node* cur = other.head;
             while (cur) {
                 Append(cur->value);
@@ -117,7 +120,7 @@ class Linked_List {
             }
         }
         //деструктор
-        ~Linked_List() {
+        ~LinkedList() {
             while (head) {
                 Node* temp = head;
                 head = head->next;
@@ -125,7 +128,7 @@ class Linked_List {
             }
         }
         //оператор присваивания
-        Linked_List<T>& operator=(const Linked_List<T>& other) {
+        LinkedList<T>& operator=(const LinkedList<T>& other) {
             if (this != &other) {
                 while (head) {
                     Node* temp = head;
@@ -192,11 +195,11 @@ class Linked_List {
         }
     //более сложные операции
         //возвращает новый список
-        Linked_List<T> GetSubList(int startIndex, int endIndex) const {
+        LinkedList<T> GetSubList(int startIndex, int endIndex) const {
             if ( startIndex < 0 || endIndex >=length || startIndex > endIndex) {
                 throw IndexOutOfRangeException();
             }
-            Linked_List<T> sub;
+            LinkedList<T> sub;
             for (int i = startIndex; i <= endIndex; ++i) {
                 sub.Append(Get(i));
             }
@@ -246,8 +249,8 @@ class Linked_List {
             --length;
         }
         //сцепление двух списков. возвращает указатель на новый список
-        Linked_List<T>* Concat(Linked_List<T>* other) const {
-            Linked_List<T>* result = new Linked_List<T>(*this); //создаем копию текущего списка в дин памяти
+        LinkedList<T>* Concat(LinkedList<T>* other) const {
+            LinkedList<T>* result = new LinkedList<T>(*this); //создаем копию текущего списка в дин памяти
             //добавляем все эл из other в конец result
             Node* cur = other->head;
             while (cur) {

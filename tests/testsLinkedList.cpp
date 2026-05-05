@@ -1,4 +1,4 @@
-#include "../headers/Linked_List.h"
+#include "../headers/LinkedList.h"
 #include <iostream>
 
 #define CHECK(condition, message) \
@@ -10,12 +10,12 @@
 #define TEST_OK(name) \
     std::cout << "[OK] " << name << std::endl;
 
-int main_Linked_List() {
+int main_LinkedList() {
     // ----------------------------------------------------------------------
     // Тест 1: Конструктор по умолчанию
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
         CHECK(list.GetLength() == 0, "Default constructor: length should be 0");
         TEST_OK("Constructor default (empty list)");
     }
@@ -25,7 +25,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Linked_List<int> list(items, 5);
+        LinkedList<int> list(items, 5);
         CHECK(list.GetLength() == 5, "Array constructor: length should be 5");
         CHECK(list[0] == 10, "Array constructor: list[0] should be 10");
         CHECK(list[2] == 30, "Array constructor: list[2] should be 30");
@@ -38,8 +38,8 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3};
-        Linked_List<int> list1(items, 3);
-        Linked_List<int> list2(list1);
+        LinkedList<int> list1(items, 3);
+        LinkedList<int> list2(list1);
 
         CHECK(list2.GetLength() == 3, "Copy constructor: length should be 3");
         CHECK(list2[0] == 1, "Copy constructor: list2[0] should be 1");
@@ -57,8 +57,8 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {5, 6, 7};
-        Linked_List<int> list1(items, 3);
-        Linked_List<int> list2;
+        LinkedList<int> list1(items, 3);
+        LinkedList<int> list2;
         list2 = list1;
 
         CHECK(list2.GetLength() == 3, "Assignment: length should be 3");
@@ -82,7 +82,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {100, 200, 300};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         CHECK(list[0] == 100, "operator[] read: list[0] should be 100");
         CHECK(list[1] == 200, "operator[] read: list[1] should be 200");
@@ -101,7 +101,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         CHECK(list.Get(0) == 10, "Get: list.Get(0) should be 10");
         CHECK(list.Get(1) == 20, "Get: list.Get(1) should be 20");
@@ -114,7 +114,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         CHECK(list.GetFirst() == 10, "GetFirst: should be 10");
         CHECK(list.GetLast() == 30, "GetLast: should be 30");
@@ -132,7 +132,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {7, 8, 9};
-        const Linked_List<int> list(items, 3);
+        const LinkedList<int> list(items, 3);
 
         CHECK(list[0] == 7, "const operator[]: list[0] should be 7");
         CHECK(list.Get(1) == 8, "const Get: list.Get(1) should be 8");
@@ -145,7 +145,7 @@ int main_Linked_List() {
     // Тест 9: Append
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
         list.Append(10);
         CHECK(list.GetLength() == 1, "Append: length should be 1");
         CHECK(list[0] == 10, "Append: list[0] should be 10");
@@ -169,7 +169,7 @@ int main_Linked_List() {
     // Тест 10: Prepend
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
         list.Prepend(30);
         CHECK(list.GetLength() == 1, "Prepend: length should be 1");
         CHECK(list[0] == 30, "Prepend: list[0] should be 30");
@@ -192,7 +192,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 30, 40};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         // Вставка в середину
         list.InsertAt(20, 1);
@@ -220,23 +220,23 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Linked_List<int> list(items, 5);
+        LinkedList<int> list(items, 5);
 
         // Подсписок с середины
-        Linked_List<int> sub1 = list.GetSubList(1, 3);
+        LinkedList<int> sub1 = list.GetSubList(1, 3);
         CHECK(sub1.GetLength() == 3, "GetSubList middle: length should be 3");
         CHECK(sub1[0] == 20, "GetSubList middle: sub1[0] should be 20");
         CHECK(sub1[1] == 30, "GetSubList middle: sub1[1] should be 30");
         CHECK(sub1[2] == 40, "GetSubList middle: sub1[2] should be 40");
 
         // Подсписок с начала
-        Linked_List<int> sub2 = list.GetSubList(0, 2);
+        LinkedList<int> sub2 = list.GetSubList(0, 2);
         CHECK(sub2.GetLength() == 3, "GetSubList beginning: length should be 3");
         CHECK(sub2[0] == 10, "GetSubList beginning: sub2[0] should be 10");
         CHECK(sub2[2] == 30, "GetSubList beginning: sub2[2] should be 30");
 
         // Подсписок до конца
-        Linked_List<int> sub3 = list.GetSubList(3, 4);
+        LinkedList<int> sub3 = list.GetSubList(3, 4);
         CHECK(sub3.GetLength() == 2, "GetSubList end: length should be 2");
         CHECK(sub3[0] == 40, "GetSubList end: sub3[0] should be 40");
         CHECK(sub3[1] == 50, "GetSubList end: sub3[1] should be 50");
@@ -253,10 +253,10 @@ int main_Linked_List() {
     {
         int items1[] = {1, 2, 3};
         int items2[] = {4, 5};
-        Linked_List<int> list1(items1, 3);
-        Linked_List<int> list2(items2, 2);
+        LinkedList<int> list1(items1, 3);
+        LinkedList<int> list2(items2, 2);
 
-        Linked_List<int>* result = list1.Concat(&list2);
+        LinkedList<int>* result = list1.Concat(&list2);
         CHECK(result->GetLength() == 5, "Concat: length should be 5");
         CHECK((*result)[0] == 1, "Concat: result[0] should be 1");
         CHECK((*result)[1] == 2, "Concat: result[1] should be 2");
@@ -276,7 +276,7 @@ int main_Linked_List() {
     // Тест 14: GetLength
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
         CHECK(list.GetLength() == 0, "GetLength: empty should be 0");
 
         list.Append(1);
@@ -291,7 +291,7 @@ int main_Linked_List() {
     // Тест 15: IndexOutOfRangeException
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
         list.Append(1);
         list.Append(2);
         list.Append(3);
@@ -322,7 +322,7 @@ int main_Linked_List() {
         bool caught = false;
 
         int items[] = {1, 2};
-        try { Linked_List<int> list(items, -2); }
+        try { LinkedList<int> list(items, -2); }
         catch (const InvalidArgumentException&) { caught = true; }
         CHECK(caught, "InvalidArgument: negative count in constructor");
 
@@ -333,7 +333,7 @@ int main_Linked_List() {
     // Тест 17: EmptyStructerException
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
         bool caught = false;
 
         try { list.GetFirst(); }
@@ -353,7 +353,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Linked_List<int> list(items, 5);
+        LinkedList<int> list(items, 5);
 
         int expected[] = {10, 20, 30, 40, 50};
         int idx = 0;
@@ -373,7 +373,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         for (auto it = list.Begin(); it != list.End(); ++it) {
             *it = (*it) * 10;
@@ -388,7 +388,7 @@ int main_Linked_List() {
     // Тест 20: Смешанные операции
     // ----------------------------------------------------------------------
     {
-        Linked_List<int> list;
+        LinkedList<int> list;
 
         list.Append(2);
         list.Prepend(1);
@@ -406,7 +406,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         Option<int> result = list.TryGet(1);
         CHECK(result.IsSome() == true, "TryGet success: IsSome should be true");
@@ -421,7 +421,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         Option<int> result = list.TryGet(5);
         CHECK(result.IsSome() == false, "TryGet fail: IsSome should be false");
@@ -435,7 +435,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         Option<int> result = list.TryGet(-1);
         CHECK(result.IsSome() == false, "TryGet negative: IsSome should be false");
@@ -449,7 +449,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Linked_List<int> list(items, 5);
+        LinkedList<int> list(items, 5);
 
         list.RemoveAt(2);
         CHECK(list.GetLength() == 4, "RemoveAt middle: length should be 4");
@@ -465,7 +465,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         list.RemoveAt(0);
         CHECK(list.GetLength() == 2, "RemoveAt first: length should be 2");
@@ -479,7 +479,7 @@ int main_Linked_List() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Linked_List<int> list(items, 3);
+        LinkedList<int> list(items, 3);
 
         list.RemoveAt(2);
         CHECK(list.GetLength() == 2, "RemoveAt last: length should be 2");

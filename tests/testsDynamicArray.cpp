@@ -1,4 +1,4 @@
-#include "../headers/Dynamic_Array.h"
+#include "../headers/DynamicArray.h"
 #include <iostream>
 
 // Макрос для проверки условия (теперь возвращает 1 при ошибке)
@@ -11,12 +11,12 @@
 // Макрос для успешного теста
 #define TEST_OK(name) \
     std::cout << "[OK] " << name << std::endl;
-int main_Dynamic_Array() {
+int main_DynamicArray() {
     // ----------------------------------------------------------------------
     // Тест 1: Конструктор по умолчанию
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr;
+        DynamicArray<int> arr;
         CHECK(arr.GetSize() == 0, "Default constructor: size should be 0");
         CHECK(arr.GetCapacity() == 1, "Default constructor: capacity should be 1");
         TEST_OK("Constructor default (empty array)");
@@ -26,7 +26,7 @@ int main_Dynamic_Array() {
     // Тест 2: Конструктор с заданным размером
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr(5);
+        DynamicArray<int> arr(5);
         CHECK(arr.GetSize() == 5, "Constructor with size: size should be 5");
         CHECK(arr.GetCapacity() == 5, "Constructor with size: capacity should be 5");
         TEST_OK("Constructor with given size");
@@ -37,7 +37,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Dynamic_Array<int> arr(items, 5);
+        DynamicArray<int> arr(items, 5);
         CHECK(arr.GetSize() == 5, "Array constructor: size should be 5");
         CHECK(arr[0] == 10, "Array constructor: arr[0] should be 10");
         CHECK(arr[2] == 30, "Array constructor: arr[2] should be 30");
@@ -50,8 +50,8 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3};
-        Dynamic_Array<int> arr1(items, 3);
-        Dynamic_Array<int> arr2(arr1);
+        DynamicArray<int> arr1(items, 3);
+        DynamicArray<int> arr2(arr1);
 
         CHECK(arr2.GetSize() == 3, "Copy constructor: size should be 3");
         CHECK(arr2[0] == 1, "Copy constructor: arr2[0] should be 1");
@@ -69,8 +69,8 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {5, 6, 7};
-        Dynamic_Array<int> arr1(items, 3);
-        Dynamic_Array<int> arr2;
+        DynamicArray<int> arr1(items, 3);
+        DynamicArray<int> arr2;
         arr2 = arr1;
 
         CHECK(arr2.GetSize() == 3, "Assignment: size should be 3");
@@ -94,7 +94,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {100, 200, 300};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         CHECK(arr[0] == 100, "operator[] read: arr[0] should be 100");
         CHECK(arr[1] == 200, "operator[] read: arr[1] should be 200");
@@ -113,7 +113,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         CHECK(arr.Get(0) == 10, "Get: arr.Get(0) should be 10");
         CHECK(arr.Get(1) == 20, "Get: arr.Get(1) should be 20");
@@ -132,7 +132,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {7, 8, 9};
-        const Dynamic_Array<int> arr(items, 3);
+        const DynamicArray<int> arr(items, 3);
 
         CHECK(arr[0] == 7, "const operator[]: arr[0] should be 7");
         CHECK(arr.Get(1) == 8, "const Get: arr.Get(1) should be 8");
@@ -145,7 +145,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         arr.Resize(5);
 
@@ -161,7 +161,7 @@ int main_Dynamic_Array() {
     // Тест 10: Resize - увеличение без перевыделения
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr(2);
+        DynamicArray<int> arr(2);
         arr[0] = 10;
         arr[1] = 20;
 
@@ -186,7 +186,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3, 4, 5};
-        Dynamic_Array<int> arr(items, 5);
+        DynamicArray<int> arr(items, 5);
 
         arr.Resize(3);
         CHECK(arr.GetSize() == 3, "Resize decrease: size should be 3");
@@ -201,7 +201,7 @@ int main_Dynamic_Array() {
     // Тест 12: Исключение IndexOutOfRangeException
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr(3);
+        DynamicArray<int> arr(3);
         bool caught = false;
 
         try { arr[5]; }
@@ -227,18 +227,18 @@ int main_Dynamic_Array() {
     {
         bool caught = false;
 
-        try { Dynamic_Array<int> arr(-5); }
+        try { DynamicArray<int> arr(-5); }
         catch (const InvalidArgumentException&) { caught = true; }
         CHECK(caught, "InvalidArgument: negative size in constructor");
 
         caught = false;
         int items[] = {1, 2};
-        try { Dynamic_Array<int> arr(items, -2); }
+        try { DynamicArray<int> arr(items, -2); }
         catch (const InvalidArgumentException&) { caught = true; }
         CHECK(caught, "InvalidArgument: negative count in array constructor");
 
         caught = false;
-        Dynamic_Array<int> arr(5);
+        DynamicArray<int> arr(5);
         try { arr.Resize(-3); }
         catch (const InvalidArgumentException&) { caught = true; }
         CHECK(caught, "InvalidArgument: negative new_size in Resize");
@@ -251,7 +251,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Dynamic_Array<int> arr(items, 5);
+        DynamicArray<int> arr(items, 5);
 
         int expected[] = {10, 20, 30, 40, 50};
         int idx = 0;
@@ -271,7 +271,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3};
-        const Dynamic_Array<int> arr(items, 3);
+        const DynamicArray<int> arr(items, 3);
 
         int sum = 0;
         for (const int* it = arr.Begin(); it != arr.End(); ++it) {
@@ -286,7 +286,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {1, 2, 3};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         for (int* it = arr.Begin(); it != arr.End(); ++it) {
             *it = (*it) * 10;
@@ -301,7 +301,7 @@ int main_Dynamic_Array() {
     // Тест 17: GetCapacity
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr(10);
+        DynamicArray<int> arr(10);
         CHECK(arr.GetCapacity() == 10, "GetCapacity: initial should be 10");
 
         arr.Resize(5);
@@ -316,7 +316,7 @@ int main_Dynamic_Array() {
     // Тест 18: Пустой массив и Resize
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr;
+        DynamicArray<int> arr;
         CHECK(arr.GetSize() == 0, "Empty array: initial size should be 0");
         CHECK(arr.GetCapacity() == 1, "Empty array: initial capacity should be 1");
 
@@ -332,7 +332,7 @@ int main_Dynamic_Array() {
     // Тест 19: Многократные Resize вверх-вниз
     // ----------------------------------------------------------------------
     {
-        Dynamic_Array<int> arr;
+        DynamicArray<int> arr;
         arr.Resize(10);
         for (int i = 0; i < 10; ++i) arr[i] = i * 10;
         arr.Resize(5);
@@ -351,7 +351,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         Option<int> result = arr.TryGet(1);
         CHECK(result.IsSome() == true, "TryGet success: IsSome should be true");
@@ -366,7 +366,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         Option<int> result = arr.TryGet(5);
         CHECK(result.IsSome() == false, "TryGet fail: IsSome should be false");
@@ -380,7 +380,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         Option<int> result = arr.TryGet(-1);
         CHECK(result.IsSome() == false, "TryGet negative: IsSome should be false");
@@ -411,7 +411,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30, 40, 50};
-        Dynamic_Array<int> arr(items, 5);
+        DynamicArray<int> arr(items, 5);
 
         arr.RemoveAt(2);  // удаляем 30
         CHECK(arr.GetSize() == 4, "RemoveAt middle: size should be 4");
@@ -427,7 +427,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         arr.RemoveAt(0);
         CHECK(arr.GetSize() == 2, "RemoveAt first: size should be 2");
@@ -441,7 +441,7 @@ int main_Dynamic_Array() {
     // ----------------------------------------------------------------------
     {
         int items[] = {10, 20, 30};
-        Dynamic_Array<int> arr(items, 3);
+        DynamicArray<int> arr(items, 3);
 
         arr.RemoveAt(2);
         CHECK(arr.GetSize() == 2, "RemoveAt last: size should be 2");

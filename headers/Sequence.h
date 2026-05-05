@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Option.h"
 
 template <typename T>
@@ -28,7 +29,7 @@ class Sequence {
         virtual Sequence<T>* InsertAt(const T& item, int index) = 0; //вставка по индексу
         virtual void RemoveAt(int index) = 0; //удаление эл
         virtual Sequence<T>* Concat(Sequence<T>* other) = 0; //сцепление двух последовательностей
-        virtual Sequence<T>* GetSubSequence(int startIndex, int endIndex) = 0; //получение последовательности
+        virtual Sequence<T>* GetSubSequence(int startIndex, int endIndex) = 0; //получение подследовательности
     //важный метод для mutable/immutable
         virtual Sequence<T>* Instance() = 0; //все методы юудут вызывать перед изменением
         virtual Sequence<T>* Clone() const = 0; //глубокая копия посл-сти
@@ -60,4 +61,6 @@ class Sequence {
             }
             return acc;
         }
+        //Resize (для GetSubSequence)
+        virtual void Resize(int newSize) = 0;
 };
