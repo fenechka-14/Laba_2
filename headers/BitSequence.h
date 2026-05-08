@@ -64,4 +64,31 @@ class BitSequence {
             data = ~data;
             if (length < 32) data &= (1u << length) - 1;
         }
+        BitSequence And(const BitSequence& other) const {
+                if (length != other.length) throw InvalidArgumentException();
+                BitSequence result(length);
+                result.data = data & other.data;
+                return result;
+            }
+
+        BitSequence Or(const BitSequence& other) const {
+                if (length != other.length) throw InvalidArgumentException();
+                BitSequence result(length);
+                result.data = data | other.data;
+                return result;
+            }
+
+        BitSequence Xor(const BitSequence& other) const {
+                if (length != other.length) throw InvalidArgumentException();
+                BitSequence result(length);
+                result.data = data ^ other.data;
+                return result;
+            }
+
+        BitSequence Not() const {
+                BitSequence result(length);
+                result.data = ~data;
+                if (length < 32) result.data &= (1u << length) - 1;
+                return result;
+            }
 };

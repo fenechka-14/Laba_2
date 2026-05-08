@@ -15,6 +15,11 @@ add_executable(main source/main.cpp
         headers/ImmutableArraySequence.h
         headers/BitSequence.h
         headers/ListSequence.h
+        headers/MutableListSequence.h
+        headers/ImmutableListSequence.h
+        source/scanValues.h
+        source/menu.h
+        source/SequenceOperations.h
 )
 
 # Тесты
@@ -32,4 +37,7 @@ add_executable(tests tests/tests.cpp
         headers/ImmutableArraySequence.h
         headers/BitSequence.h
         tests/testsBitSequence.cpp
-        headers/ListSequence.h)
+        headers/ListSequence.h
+        headers/MutableListSequence.h
+        headers/ImmutableListSequence.h
+        tests/testsListSequence.cpp)
